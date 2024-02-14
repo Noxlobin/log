@@ -1,4 +1,4 @@
-package main
+package color
 
 func WrapRed(text string) string {
 	return Red + text + Reset

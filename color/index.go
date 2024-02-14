@@ -1,4 +1,4 @@
-package main
+package color
 
 // important: dosent work in powershell (based on the article i read)
 // colors for warnings and errors.
