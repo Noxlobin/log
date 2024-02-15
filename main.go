@@ -40,6 +40,26 @@ func ErrorLn(e ...string) {
 	os.Exit(1)
 }
 
-func main() {
-	ErrorLn("Missing separator")
+// Pref-Suf Functions
+
+// add a string to the front of another string. includes a delim, which will come in-between
+func Prefix(p string, s string, d string) string {
+	return p + d + s
+}
+
+// add a string to the back of another string. includes a delim, which will come in-between
+func Suffix(p string, s string, d string) string {
+	return s + d + p
+}
+
+// Pref-Suf then Print Functions
+
+// add a string to the front of another string, then print it. includes a delim, which will come in-between
+func PrefPrint(p string, s string, d string) {
+	fmt.Print(p + d + s)
+}
+
+// add a string to the back of another string, then print it. includes a delim, which will come in-between
+func SufPrint(p string, s string, d string) {
+	fmt.Print(s + d + p)
 }
