@@ -1,12 +1,25 @@
-package main
+package log
 
 import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/noxlobin/log/color"
 )
+
+type DebugFormats struct {
+	date         time.Time
+	messageColor string
+	code         string
+}
+
+var DefaultFormat = &DebugFormats{
+	date:         time.Now(),
+	messageColor: color.White,
+	code:         "",
+}
 
 // This is where i put my logging functions. yes, its unclean, but i'll have nothing to do in this file if i put it in another file.
 
@@ -62,4 +75,27 @@ func PrefPrint(p string, s string, d string) {
 // add a string to the back of another string, then print it. includes a delim, which will come in-between
 func SufPrint(p string, s string, d string) {
 	fmt.Print(s + d + p)
+}
+
+// Debug functions
+
+func Debug(m string, f DebugFormats) {
+	fmt.Print("\033[42m" + f.date.Format(time.RFC1123) + "\033[0m" + " ")
+	fmt.Print("\033[44m"+" DEBUG "+"\033[0m", " ")
+	fmt.Print(f.messageColor + m + color.Reset)
+	if f.code != "" {
+		fmt.Print(" "+"\033[41m"+f.code+"\033[0m", " ")
+	}
+	fmt.Print("\n")
+}
+
+func Warning(m string, f DebugFormats) {
+	fmt.Print("\033[42m" + f.date.Format(time.RFC1123) + "\033[0m" + " ")
+	fmt.Print("\033[43m"+" WARNING "+"\033[0m", " ")
+	fmt.Print(f.messageColor + m + color.Reset)
+	if f.code != "" {
+		fmt.Print(" "+"\033[41m"+f.code+"\033[0m", " ")
+	}
+	fmt.Print("\n")
+	os.Exit(2)
 }
